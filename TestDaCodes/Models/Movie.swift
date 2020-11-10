@@ -12,7 +12,7 @@ struct Movie: Decodable {
     let title: String
     let posterPath: String?
     let voteAverage: Double
-    let releaseDate: String
+    let releaseDate: Date
 }
 
 struct MovieDetails: Decodable {
@@ -20,7 +20,7 @@ struct MovieDetails: Decodable {
     let genres: [Genre]
     let overview: String?
     let posterPath: String?
-    let releaseDate: String?
+    let releaseDate: Date?
     let runtime: Int?
     let voteAverage: Double
     let title: String

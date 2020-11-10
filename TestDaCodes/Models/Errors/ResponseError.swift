@@ -8,16 +8,6 @@
 import Foundation
 
 struct ResponseError: Decodable {
-    let message: String
-    let exception: String?
-    let file: String?
-    let trace: [Trace]?
-}
-
-struct Trace: Decodable {
-    let file: String
-    let line: Int
-    let function: String
-    let `class`: String
-    let type: String
+    let statusCode: Int
+    let statusMessage: String
 }

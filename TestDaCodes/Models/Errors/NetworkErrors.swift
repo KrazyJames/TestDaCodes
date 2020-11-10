@@ -19,7 +19,7 @@ enum NetworkError: Error {
     var localizedDescription: String {
         switch self {
         case .serverError(let error):
-            return "Server Error: \n\(error.message)"
+            return "Server Error: \n\(error.statusMessage)"
         case .invalidJSON(let error):
             return "Server Error: \n\(error.localizedDescription)"
         case .invalidStatusCode(let code):

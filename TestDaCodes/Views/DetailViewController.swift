@@ -57,7 +57,9 @@ class DetailViewController: UIViewController {
         } else {
             durationLabel.text = "-- min"
         }
-        dateLabel.text = movie.releaseDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        dateLabel.text = dateFormatter.string(from: movie.releaseDate ?? Date())
         rateLabel.text = "\(movie.voteAverage)"
         genresLabel.text = getGenresAsString(genres: movie.genres)
         descriptionLabel.text = movie.overview

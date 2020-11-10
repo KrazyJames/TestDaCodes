@@ -21,7 +21,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
             self.posterImageView.af.setImage(withURL: url)
         }
         titleLabel.text = movie.title
-        releaseDateLabel.text = movie.releaseDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        releaseDateLabel.text = dateFormatter.string(from: movie.releaseDate)
         ratingLabel.text = "\(movie.voteAverage)"
     }
 }

@@ -7,8 +7,13 @@
 
 import Foundation
 
-class MoviesViewModel {
-    var movies: [Movie] = []
+final class MoviesViewModel {
+    private let movieServiceCaller = MovieServiceCaller()
+    private var movies: [Movie] = []
+    
+    var totalMovies: Int {
+        return movies.count
+    }
     
     var hasNextPage: Bool {
         guard let response = moviesResponse else { return false }
@@ -25,9 +30,14 @@ class MoviesViewModel {
     }
     
     // MARK:- Binding
-    var moviesDidLoad: Box<Bool> = Box(false)
-    var networkError: Box<NetworkError?> = Box(nil)
-    var isLoadingMovies: Bool = false
+    enum RequestStatus {
+        case loading
+        case didLoad
+        case error(_ error: NetworkError)
+    }
+    
+    private var isLoading = false
+    var requestStatus: Box<RequestStatus> = Box(.loading)
 
     // MARK:- Movies Networking
     private var moviesResponse: MovieResponse? {
@@ -39,30 +49,35 @@ class MoviesViewModel {
     }
     
     func loadMovies(page: Int = 1) {
-        self.moviesDidLoad.value = false
-        MovieServiceCaller.getPlayingNow(page: page) { (result) in
+        requestStatus.value = .loading
+        isLoading = true
+        movieServiceCaller.getPlayingNow(page: page) { result in
+            self.isLoading = false
             switch result {
             case .success(let response):
                 self.moviesResponse = response
-                self.moviesDidLoad.value = true
+                self.requestStatus.value = .didLoad
             case .failure(let error):
-                self.networkError.value = error
+                self.requestStatus.value = .error(error)
             }
         }
     }
     
     func reloadMovies() {
+        guard !isLoading else { return }
         movies.removeAll()
         moviesResponse = nil
-        moviesDidLoad.value = false
         loadMovies()
     }
     
     func loadMoreMovies(_ currentRow: Int) {
         guard currentRow >= (movies.count - 5) else { return }
-        guard !isLoadingMovies else { return }
+        guard !isLoading else { return }
         guard let nextPage = nextPage else { return }
         loadMovies(page: nextPage)
     }
-
+    
+    func getMovie(at index: Int) -> Movie? {
+        return movies[safe: index]
+    }
 }

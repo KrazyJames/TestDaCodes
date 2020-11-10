@@ -14,9 +14,7 @@ enum MovieRouter: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .getPlayingNow:
-            return .get
-        case .getMovieDetails:
+        case .getPlayingNow, .getMovieDetails:
             return .get
         }
     }
@@ -30,8 +28,8 @@ enum MovieRouter: URLRequestConvertible {
         }
     }
     
-    var parameters: [String: Any] {
-        var params: [String: Any] = [HTTPHeadersField.apiKey.rawValue : APIManager.apiKey]
+    var parameters: Parameters {
+        var params: Parameters = [HTTPHeadersField.apiKey.rawValue: APIManager.apiKey]
         switch self {
         case .getPlayingNow(let page):
             params.updateValue(page, forKey: "page")
@@ -47,7 +45,6 @@ enum MovieRouter: URLRequestConvertible {
             method: method)
         urlRequest.httpMethod = method.rawValue
         urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-        print(urlRequest)
         return urlRequest
     }
 }

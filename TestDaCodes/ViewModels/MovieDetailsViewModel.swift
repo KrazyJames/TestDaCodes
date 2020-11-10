@@ -7,8 +7,8 @@
 
 import Foundation
 
-class MovieDetailsViewModel {
-    
+final class MovieDetailsViewModel {
+    private let movieServiceCaller = MovieServiceCaller()
     var movie: MovieDetails?
     
     // MARK:- Binding
@@ -26,7 +26,7 @@ class MovieDetailsViewModel {
     
     func loadMovie(id: Int) {
         self.movieDetailsDidLoad.value = false
-        MovieServiceCaller.getMovieDetails(id: id) { (result) in
+        movieServiceCaller.getMovieDetails(id: id) { (result) in
             switch result {
             case .success(let details):
                 self.movieDetailResponse = details
