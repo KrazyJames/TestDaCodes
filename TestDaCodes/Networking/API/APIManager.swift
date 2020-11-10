@@ -13,6 +13,7 @@ struct APIManager {
     static let apiKey = "634b49e294bd1ff87914e7b9d014daed"
 }
 
-enum HTTPHeadersField: String {
+enum HTTPParameterField: String {
     case apiKey = "api_key"
+    case language = "language"
 }

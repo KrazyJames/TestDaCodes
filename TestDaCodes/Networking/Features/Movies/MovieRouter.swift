@@ -29,7 +29,8 @@ enum MovieRouter: URLRequestConvertible {
     }
     
     var parameters: Parameters {
-        var params: Parameters = [HTTPHeadersField.apiKey.rawValue: APIManager.apiKey]
+        var params: Parameters = [HTTPParameterField.apiKey.rawValue: APIManager.apiKey]
+        params.updateValue("es-MX", forKey: HTTPParameterField.language.rawValue)
         switch self {
         case .getPlayingNow(let page):
             params.updateValue(page, forKey: "page")
