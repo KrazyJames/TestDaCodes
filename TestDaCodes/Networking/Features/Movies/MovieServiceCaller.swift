@@ -17,7 +17,7 @@ final class MovieServiceCaller {
         }
     }
     
-    func getMovieDetails(id: Int, completion: @escaping (Result<MovieDetails, NetworkError>) -> Void) {
+    func getMovieDetails(id: Int, completion: @escaping (Result<MovieDetail, NetworkError>) -> Void) {
         let router = MovieRouter.getMovieDetails(id: id)
         serviceRequester.request(router: router) { (result) in
             completion(result)

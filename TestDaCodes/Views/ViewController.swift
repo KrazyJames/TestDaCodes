@@ -7,11 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
+    // MARK: - IBOulets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    // MARK: - Properties
     private let moviesViewModel = MoviesViewModel()
     private var selectedMovieId: Int?
     private let refreshControl = UIRefreshControl()
@@ -22,6 +24,7 @@ class ViewController: UIViewController {
         static let segueID = "showDetailsSegue"
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()

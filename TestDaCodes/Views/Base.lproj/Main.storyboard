@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qw8-av-RY3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="66f-HH-ED4">
                                     <size key="itemSize" width="236" height="357"/>
@@ -125,7 +125,7 @@
                         <constraints>
                             <constraint firstItem="qw8-av-RY3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="18T-A7-tf9"/>
                             <constraint firstItem="qw8-av-RY3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4en-IA-b4u"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qw8-av-RY3" secondAttribute="bottom" id="6rj-W2-zrS"/>
+                            <constraint firstAttribute="bottom" secondItem="qw8-av-RY3" secondAttribute="bottom" id="6rj-W2-zrS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qw8-av-RY3" secondAttribute="trailing" id="cFM-Qy-aBD"/>
                         </constraints>
                     </view>
@@ -331,7 +331,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdu-Vt-xcE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="81.696428571428569"/>
+            <point key="canvasLocation" x="214" y="82"/>
         </scene>
     </scenes>
     <resources>

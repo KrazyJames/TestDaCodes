@@ -8,13 +8,15 @@
 import UIKit
 import AlamofireImage
 
-class MovieCollectionViewCell: UICollectionViewCell {
+final class MovieCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - IBOulets
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
-    
+    // MARK: - Functions
     func configure(with movie: Movie) {
         if let posterPath = movie.posterPath {
             guard let url = URL(string: APIManager.imageUrlBase.appending(posterPath)) else { return }

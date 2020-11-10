@@ -9,30 +9,35 @@ import Foundation
 
 final class MovieDetailsViewModel {
     private let movieServiceCaller = MovieServiceCaller()
-    var movie: MovieDetails?
+    var movieDetail: MovieDetail?
     
     // MARK:- Binding
-    var networkError: Box<NetworkError?> = Box(nil)
-    var movieDetailsDidLoad: Box<Bool> = Box(false)
+    enum RequestStatus {
+        case loading
+        case didLoad
+        case error(_ error: NetworkError)
+    }
+    
+    var requestStatus: Box<RequestStatus> = Box(.loading)
     
     // MARK:- MovieDetails Networking
-    private var movieDetailResponse: MovieDetails? {
+    private var movieDetailResponse: MovieDetail? {
         didSet {
             if let details = movieDetailResponse.self {
-                self.movie = details
+                self.movieDetail = details
             }
         }
     }
     
     func loadMovie(id: Int) {
-        self.movieDetailsDidLoad.value = false
-        movieServiceCaller.getMovieDetails(id: id) { (result) in
+        requestStatus.value = .loading
+        movieServiceCaller.getMovieDetails(id: id) { result in
             switch result {
             case .success(let details):
                 self.movieDetailResponse = details
-                self.movieDetailsDidLoad.value = true
+                self.requestStatus.value = .didLoad
             case .failure(let error):
-                self.networkError.value = error
+                self.requestStatus.value = .error(error)
             }
         }
     }
