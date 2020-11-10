@@ -97,6 +97,10 @@ extension ViewController: UICollectionViewDelegate {
 // MARK:- Collection View Delegate Flow Layout
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2-20, height: 270.0)
+        return CGSize(width: view.frame.width/2-20, height: kDesigning.collectionViewCellHeight)
     }
+}
+
+private enum kDesigning {
+    static let collectionViewCellHeight: CGFloat = 270
 }

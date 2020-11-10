@@ -50,7 +50,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00-mmm-0000" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DT-cK-Ttp">
-                                                                    <rect key="frame" x="8" y="36.5" width="120" height="22"/>
+                                                                    <rect key="frame" x="8" y="36.5" width="162" height="22"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                                                         <constraint firstAttribute="width" secondItem="fCd-rd-kC8" secondAttribute="height" multiplier="1:1" id="Vr2-ML-RZl"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5N-3B-KJH">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5N-3B-KJH">
                                                                     <rect key="frame" x="204" y="37.5" width="24" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,6 +81,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="SR4-Sx-Dze" secondAttribute="trailing" constant="8" id="kOT-gX-jLC"/>
                                                                 <constraint firstItem="7DT-cK-Ttp" firstAttribute="leading" secondItem="8KC-Ob-VCF" secondAttribute="leading" constant="8" id="n6j-qa-66L"/>
                                                                 <constraint firstAttribute="bottom" secondItem="fCd-rd-kC8" secondAttribute="bottom" constant="8" id="qSF-8Z-MT3"/>
+                                                                <constraint firstItem="fCd-rd-kC8" firstAttribute="leading" secondItem="7DT-cK-Ttp" secondAttribute="trailing" constant="8" id="quQ-1b-A67"/>
                                                                 <constraint firstItem="fCd-rd-kC8" firstAttribute="top" secondItem="SR4-Sx-Dze" secondAttribute="bottom" constant="8" symbolic="YES" id="sIm-fV-3UX"/>
                                                             </constraints>
                                                         </view>
