@@ -28,6 +28,8 @@ class DetailViewController: UIViewController {
     func configure(with movieId: Int) {
         movieDetailsViewModel.loadMovie(id: movieId)
     }
+   
+    // MARK:- Binding
     
     private func bindingValues() {
         movieDetailsViewModel.networkError.bind { error in

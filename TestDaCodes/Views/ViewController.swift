@@ -8,6 +8,7 @@
 import UIKit
 
 private let reusableCellID = "MovieCollectionViewCell"
+private let segueID = "showDetailsSegue"
 
 class ViewController: UIViewController {
 
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
         bindValues()
     }
     
+    // MARK:- Binding
     private func bindValues() {
         moviesViewModel.networkError.bind { [weak self] error in
             guard self != nil else { return }
@@ -46,14 +48,15 @@ class ViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailViewController {
-            if let item = selectedMovie {
-                destination.configure(with: item)
+            if let movie = selectedMovie {
+                destination.configure(with: movie)
             }
         }
     }
 
 }
 
+// MARK:- Collection View Data Source
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return moviesViewModel.movies.count
@@ -67,12 +70,15 @@ extension ViewController: UICollectionViewDataSource {
     
 }
 
+// MARK:- Collection View Delegate
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMovie = moviesViewModel.movies[indexPath.row].id
+        performSegue(withIdentifier: segueID, sender: self)
     }
 }
 
+// MARK:- Collection View Delegate Flow Layout
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2-20, height: 270.0)
