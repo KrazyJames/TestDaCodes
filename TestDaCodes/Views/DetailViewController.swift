@@ -30,13 +30,13 @@ class DetailViewController: UIViewController {
     }
    
     // MARK:- Binding
-    
     private func bindingValues() {
         movieDetailsViewModel.networkError.bind { error in
             if let error = error {
                 print(error.localizedDescription)
             }
         }
+        
         movieDetailsViewModel.movieDetailsDidLoad.bind { [weak self] didLoad in
             guard let self = self else { return }
             guard didLoad else { return }
@@ -44,6 +44,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    // MARK:- Functions
     private func setUpView() {
         guard let movie = movieDetailsViewModel.movie else { return }
         if let posterPath = movie.posterPath {

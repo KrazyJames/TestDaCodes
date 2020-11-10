@@ -19,8 +19,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         if let posterPath = movie.posterPath {
             guard let url = URL(string: APIManager.imageUrlBase.appending(posterPath)) else { return }
             self.posterImageView.af.setImage(withURL: url)
-        } else {
-            // Set placeholder image
         }
         titleLabel.text = movie.title
         releaseDateLabel.text = movie.releaseDate

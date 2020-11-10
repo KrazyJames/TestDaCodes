@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         collectionView.refreshControl = refreshControl
     }
     
+    // MARK:- Functions
     @objc func refresh() {
         if !moviesViewModel.isLoadingMovies {
             moviesViewModel.reloadMovies()
@@ -39,16 +40,25 @@ class ViewController: UIViewController {
         bindValues()
     }
     
+    private func presentAlert(with error: NetworkError) {
+        let alert = UIAlertController(title: "Occurrió un error", message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default) { (action) in
+            self.moviesViewModel.reloadMovies()
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK:- Binding
     private func bindValues() {
         moviesViewModel.networkError.bind { [weak self] error in
             guard let self = self else { return }
-            if let error = error {
-                print(error.localizedDescription)
-                self.refreshControl.endRefreshing()
-                self.moviesViewModel.networkError.value = nil
-            }
+            guard let error = error else { return }
+            self.presentAlert(with: error)
+            self.refreshControl.endRefreshing()
+            self.moviesViewModel.networkError.value = nil
         }
+        
         moviesViewModel.moviesDidLoad.bind { [weak self] didLoad in
             guard let self = self else { return }
             guard didLoad else { return }
