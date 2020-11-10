@@ -8,8 +8,8 @@
 import Foundation
 
 class MovieServiceCaller {
-    static func getPlayingNow(completion: @escaping (Result<MovieResponse, NetworkError>) -> Void) {
-        let router = MovieRouter.getPlayingNow
+    static func getPlayingNow(page: Int, completion: @escaping (Result<MovieResponse, NetworkError>) -> Void) {
+        let router = MovieRouter.getPlayingNow(page: page)
         ServiceRequester.request(router: router) { (result) in
             completion(result)
         }

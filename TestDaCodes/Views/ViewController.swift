@@ -17,12 +17,21 @@ class ViewController: UIViewController {
     
     private let moviesViewModel = MoviesViewModel()
     private var selectedMovie: Int?
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         collectionView.delegate = self
         collectionView.dataSource = self
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh() {
+        if !moviesViewModel.isLoadingMovies {
+            moviesViewModel.reloadMovies()
+        }
     }
     
     func setUp() {
@@ -33,14 +42,17 @@ class ViewController: UIViewController {
     // MARK:- Binding
     private func bindValues() {
         moviesViewModel.networkError.bind { [weak self] error in
-            guard self != nil else { return }
+            guard let self = self else { return }
             if let error = error {
                 print(error.localizedDescription)
+                self.refreshControl.endRefreshing()
+                self.moviesViewModel.networkError.value = nil
             }
         }
         moviesViewModel.moviesDidLoad.bind { [weak self] didLoad in
             guard let self = self else { return }
             guard didLoad else { return }
+            self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
         }
     }
@@ -66,6 +78,10 @@ extension ViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellID, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
         cell.configure(with: moviesViewModel.movies[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        moviesViewModel.loadMoreMovies(indexPath.row)
     }
     
 }

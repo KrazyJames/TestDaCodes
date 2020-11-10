@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 enum MovieRouter: URLRequestConvertible {
-    case getPlayingNow
+    case getPlayingNow(page: Int)
     case getMovieDetails(id: Int)
     
     var method: HTTPMethod {
@@ -24,14 +24,21 @@ enum MovieRouter: URLRequestConvertible {
     var path: String {
         switch self {
         case .getPlayingNow:
-            return "/movie/now_playing"
+            return "/movie/now_playing/"
         case .getMovieDetails(let id):
             return "/movie/\(id)"
         }
     }
     
     var parameters: [String: Any] {
-        return [HTTPHeadersField.apiKey.rawValue : APIManager.apiKey]
+        var params: [String: Any] = [HTTPHeadersField.apiKey.rawValue : APIManager.apiKey]
+        switch self {
+        case .getPlayingNow(let page):
+            params.updateValue(page, forKey: "page")
+            return params
+        default:
+            return params
+        }
     }
     
     func asURLRequest() throws -> URLRequest {
